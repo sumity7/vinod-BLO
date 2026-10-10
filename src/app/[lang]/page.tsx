@@ -23,8 +23,8 @@ export async function generateMetadata({ params }: LangParams): Promise<Metadata
 }
 
 /**
- * Home is only about the leader and his office: banner, quick services, biography, journey, the
- * complaint and e-card invitations, events, Stay Connected (Facebook and YouTube), then the contact
+ * Home is only about the leader and his office: banner, quick services, biography, journey, events,
+ * the complaint and e-card invitations, Stay Connected (Facebook and YouTube), then the contact
  * form. Ideals, Vikas Yatra and Vichar live on their own pages, reached from the navigation.
  */
 export default async function HomePage({ params }: LangParams) {
@@ -34,8 +34,8 @@ export default async function HomePage({ params }: LangParams) {
       <Hero lang={lang} />
       <About lang={lang} />
       <JourneyBand lang={lang} />
-      <PortalCtas lang={lang} />
       <Updates lang={lang} />
+      <PortalCtas lang={lang} />
       <StayConnected lang={lang} />
       <ContactSection lang={lang} />
       <JsonLd data={profilePageLd(lang, "", homeSeo.title[lang], homeSeo.description[lang])} />

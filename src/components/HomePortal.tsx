@@ -35,7 +35,8 @@ export function PortalCtas({ lang }: { lang: Lang }) {
     "group relative flex h-full flex-col overflow-hidden rounded-panel shadow-soft transition-[transform,box-shadow] duration-500 ease-[var(--ease-out)] hover:shadow-raised motion-safe:hover:-translate-y-1.5";
 
   return (
-    <section className="section pt-0">
+    <section className="section bg-paper pb-0!">
+      {/* Followed by Stay Connected on the same white, whose own top padding is the gap between them. */}
       <div className="shell grid gap-6 md:grid-cols-2">
         {/* e-Shikayat */}
         <Reveal className="h-full">
