@@ -14,6 +14,7 @@ export function Hero({ lang }: { lang: Lang }) {
     eyebrow: tr(s.eyebrow, lang),
     title: s.title[lang],
     subtitle: s.subtitle ? tr(s.subtitle, lang).replace(/^\(|\)$/g, "") : undefined,
+    subtitleNote: s.subtitleNote ? tr(s.subtitleNote, lang) : undefined,
     description: tr(s.description, lang),
     primary: { href: localePath(lang, s.primary.href), label: tr(s.primary.label, lang) },
     secondary: s.secondaryButton

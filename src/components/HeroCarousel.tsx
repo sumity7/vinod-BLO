@@ -10,6 +10,7 @@ export type HeroSlideView = {
   eyebrow: string;
   title: string[];
   subtitle?: string;
+  subtitleNote?: string;
   description: string;
   primary: { href: string; label: string };
   /** Replaces the shared Contact button on this slide. */
@@ -94,7 +95,14 @@ export function HeroCarousel({
                     ))}
                   </Heading>
 
-                  {s.subtitle && <p className="mt-3 text-lg font-medium text-peach sm:text-2xl">{s.subtitle}</p>}
+                  {s.subtitle && (
+                    <p className="mt-3 text-lg font-medium text-peach sm:text-2xl">
+                      {s.subtitle}
+                      {s.subtitleNote && (
+                        <span className="ml-2 inline-block text-[0.95rem] font-normal text-white/80 sm:text-lg">({s.subtitleNote})</span>
+                      )}
+                    </p>
+                  )}
 
                   <p className="mt-4 max-w-xl text-[1.05rem] leading-relaxed text-white/85 sm:text-lg">
                     {s.description}

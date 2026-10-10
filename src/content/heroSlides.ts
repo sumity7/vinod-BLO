@@ -12,6 +12,8 @@ export type HeroSlide = {
   label: L;
   title: { en: string[]; hi: string[] };
   subtitle?: L;
+  /** A short note after the subtitle, in smaller type and brackets. */
+  subtitleNote?: L;
   description: L;
   snapshot: { title: L; rows: { k: L; v: L }[] };
   primary: { label: L; href: string };
@@ -41,6 +43,7 @@ export const heroSlides: HeroSlide[] = [
       hi: ["विनोद कुमार", "उपाध्याय"],
     },
     subtitle: { en: "(Block Pramukh, Harhua)", hi: "(ब्लॉक प्रमुख, हरहुआ)" },
+    subtitleNote: { en: "Shivpur Vidhan Sabha", hi: "शिवपुर विधानसभा" },
     description: {
       en: "Dedicated to carrying the spirit of service and public welfare to the last person in society, through public service, development and organisation.",
       hi: "जनसेवा, विकास और संगठन के माध्यम से समाज के अंतिम व्यक्ति तक सेवा और जनकल्याण की भावना को आगे बढ़ाने के लिए समर्पित।",
