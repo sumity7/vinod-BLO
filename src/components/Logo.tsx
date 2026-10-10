@@ -3,32 +3,24 @@ import Link from "next/link";
 import { localePath, type Lang } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
-/** The emblem and the name, side by side. */
+/** The official logo: the lotus and the name in Devanagari over a saffron-to-green sweep. */
 export function Logo({ lang }: { lang: Lang }) {
   const name = site.name[lang];
   return (
     <Link
       href={localePath(lang)}
       aria-label={`${name} – ${lang === "hi" ? "मुख्य पृष्ठ" : "home"}`}
-      className="flex min-w-0 items-center gap-3"
+      className="flex min-w-0 shrink items-center"
     >
       <Image
-        src="/images/logo.webp"
-        alt=""
-        width={540}
-        height={540}
-        sizes="64px"
+        src="/images/brand-logo-h.webp"
+        alt={name}
+        width={871}
+        height={180}
+        sizes="(min-width: 1024px) 270px, 220px"
         loading="eager"
-        className="h-12 w-12 lg:h-14 lg:w-14"
+        className="h-auto w-[12.5rem] max-w-full sm:w-[14rem] lg:w-[16.5rem]"
       />
-      <span className="min-w-0 leading-tight">
-        <span className="block truncate font-display text-[1.1rem] font-semibold text-ink sm:text-[1.4rem] lg:text-[1.6rem]">
-          {name}
-        </span>
-        <span className="block text-[0.75rem] font-medium text-saffron-deep sm:text-[0.85rem]">
-          {site.roleShort[lang]}
-        </span>
-      </span>
     </Link>
   );
 }

@@ -65,7 +65,10 @@ export default async function ECardPage({
   const lang = await getLang(params);
   const t = pt(lang);
   const { occasion } = await searchParams;
-  const host = new URL(site.url).host;
+  // The card's foot line: the Facebook page, which stays the same wherever the site runs (the site's
+  // own address is localhost or a vercel.app name until a domain is chosen).
+  const fb = site.socials.find((x) => x.id === "facebook");
+  const footer = fb ? fb.href.replace(/^https?:\/\/(www\.)?/, "") : site.name[lang];
 
   return (
     <>
@@ -88,7 +91,7 @@ export default async function ECardPage({
               photo: "/images/leader-standing.webp",
               logo: "/images/logo.webp",
             }}
-            footer={host}
+            footer={footer}
             fileStem={lang === "hi" ? "shubhkamna" : "greeting"}
             labels={{
               ...t.ecard,
