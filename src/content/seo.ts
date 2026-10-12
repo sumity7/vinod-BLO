@@ -9,8 +9,8 @@ type PageSeo = { title: L; description: L };
 
 export const homeSeo: PageSeo = {
   title: {
-    en: "Vinod Kumar Upadhyay | Block Pramukh, Harhua, Varanasi | Official Website",
-    hi: "विनोद कुमार उपाध्याय | ब्लॉक प्रमुख, हरहुआ, वाराणसी | आधिकारिक वेबसाइट",
+    en: "Vinod Kumar Upadhyay | Block Pramukh, Harhua, Varanasi",
+    hi: "विनोद कुमार उपाध्याय | ब्लॉक प्रमुख, हरहुआ, वाराणसी",
   },
   description: {
     en: "Official website of Vinod Kumar Upadhyay, Block Pramukh of Harhua Block, Varanasi (Shivpur Assembly Constituency): his journey, development work, social service, media and contact.",

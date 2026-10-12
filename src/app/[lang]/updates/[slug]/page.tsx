@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata({
     lang,
     path: `/updates/${slug}`,
-    title: tr(update.title, lang),
+    title: tr(update.seoTitle ?? update.title, lang),
     description: tr(update.summary, lang),
     type: "article",
     publishedTime: update.date,

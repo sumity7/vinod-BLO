@@ -28,6 +28,8 @@ export type Update = {
   /** ISO yyyy-mm-dd. Left out when the date is not known; nothing is guessed. */
   date?: string;
   title: L;
+  /** A shorter title for the browser tab and search results, when the heading is too long for them. */
+  seoTitle?: L;
   summary: L;
   /** Fuller description shown as the lead on the detail page; the card uses `summary`. */
   description?: L;
@@ -74,6 +76,10 @@ export const updates: Update[] = [
     category: "events",
     title: {
       en: "Rudrabhishek at Shiva temples across Harhua Block through the month of Sawan",
+      hi: "सावन मास भर हरहुआ ब्लॉक के शिव मंदिरों में रुद्राभिषेक",
+    },
+    seoTitle: {
+      en: "Rudrabhishek at Harhua’s Shiva temples in Sawan",
       hi: "सावन मास भर हरहुआ ब्लॉक के शिव मंदिरों में रुद्राभिषेक",
     },
     summary: {

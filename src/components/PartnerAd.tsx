@@ -27,7 +27,7 @@ export function PartnerAd({ lang }: { lang: Lang }) {
           className="pointer-events-none absolute inset-y-0 left-0 w-1/3 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent group-hover:[animation:ad-shine_0.9s_ease-out]"
         />
         <span className="relative block">
-          <span className="block text-[0.65rem] font-medium uppercase tracking-[0.18em] text-white/80">
+          <span className="block text-xs font-medium uppercase tracking-[0.14em] text-white/90">
             {t.label}
           </span>
           <span className="block font-display text-[1.05rem] font-semibold leading-tight">{t.name}</span>

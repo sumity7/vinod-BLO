@@ -26,6 +26,24 @@ function clip(text: string, max: number) {
   return (at > max * 0.6 ? cut.slice(0, at) : cut).replace(/[\s,;:–-]+$/, "") + "…";
 }
 
+/**
+ * The text of the browser tab and the search-result headline. Search engines show about 60 characters
+ * (a little fewer in Devanagari), so a long "Title | Name" is shortened in this order: the whole title
+ * alone (without the name); else the part before its colon plus the name; else the title cut at a word.
+ * The page's own heading is untouched, and so are the Open Graph titles used by link previews.
+ */
+function fitTitle(title: string, name: string, lang: Lang): { title: string; absolute: boolean } {
+  const max = lang === "hi" ? 54 : 62;
+  const withName = (t: string) => `${t} | ${name}`;
+  if (withName(title).length <= max) return { title, absolute: false };
+  // Whole title without the name: keeps a title like "Our Ideals: Leaders of ..." distinct from its siblings.
+  if (title.length <= max) return { title, absolute: true };
+  const head = title.split(/:\s/)[0].trim();
+  if (head !== title && head.length >= 8 && withName(head).length <= max) return { title: head, absolute: false };
+  if (head !== title && head.length >= 8 && head.length <= max) return { title: head, absolute: true };
+  return { title: clip(title, max), absolute: true };
+}
+
 export function buildMetadata({
   lang,
   path,
@@ -36,8 +54,9 @@ export function buildMetadata({
   absoluteTitle = false,
   publishedTime,
 }: PageMeta): Metadata {
-  // The page template adds the person's name to titles, so leave room for it.
-  title = clip(title, absoluteTitle ? 70 : 90);
+  // Open Graph and Twitter keep the full title (link previews have more room); the tab text is fitted below.
+  const fitted = absoluteTitle ? { title: clip(title, lang === "hi" ? 54 : 62), absolute: true } : fitTitle(title, site.name[lang], lang);
+  title = clip(title, 90);
   description = clip(description, 160);
   const img = typeof image === "string" ? { src: image, width: 1200, height: 630, alt: site.name[lang] } : image;
   const canonical = localePath(lang, path);
@@ -47,7 +66,7 @@ export function buildMetadata({
   languages["x-default"] = localePath(defaultLang, path);
 
   return {
-    title: absoluteTitle ? { absolute: title } : title,
+    title: fitted.absolute ? { absolute: fitted.title } : fitted.title,
     description,
     alternates: { canonical, languages },
     openGraph: {
