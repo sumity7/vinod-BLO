@@ -333,7 +333,7 @@ label {
   transition-duration: 0.12s;
 }
 .btn-sm {
-  min-height: 2.5rem;
+  min-height: 2.75rem;
   padding: 0.45rem 1rem;
   font-size: 0.9375rem;
 }
@@ -546,6 +546,21 @@ label {
   }
   html[data-js] .tl-item.is-shown .tl-line {
     transform: translateX(-50%) scaleY(1);
+  }
+}
+
+/* The floating buttons on phones (quick services, assistant) slide out of the way while the visitor
+   scrolls down, and return on scrolling up (see ScrollDirection). Desktop keeps them where they are. */
+@media (max-width: 1023px) {
+  .fab {
+    transition:
+      opacity 0.25s var(--ease-out),
+      transform 0.3s var(--ease-out);
+  }
+  html[data-fab-hidden] .fab {
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
   }
 }
 

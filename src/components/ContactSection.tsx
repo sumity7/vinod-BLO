@@ -39,7 +39,7 @@ export function ContactSection({ lang, compact = false }: { lang: Lang; compact?
                         rel="noopener noreferrer"
                         className="group flex items-center gap-3 py-3 transition-colors hover:text-saffron-deep"
                       >
-                        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-soft bg-sand text-saffron-deep transition-colors group-hover:bg-saffron group-hover:text-white">
+                        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-soft bg-sand text-saffron-deep transition-colors group-hover:bg-saffron-deep group-hover:text-white">
                           <Icon className="h-[1.1rem] w-[1.1rem]" />
                         </span>
                         <span className="min-w-0">

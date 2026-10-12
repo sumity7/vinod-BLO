@@ -76,14 +76,15 @@ export function QuickDockClient({ label, close, items }: { label: string; close:
         </ul>
       </nav>
 
-      {/* Smaller screens: a tab on the edge that opens the panel. */}
-      <div ref={panel} className="fixed right-0 top-1/2 z-30 -translate-y-1/2 lg:hidden">
+      {/* Smaller screens: a round button in the corner, just above the assistant button (so it never covers
+          the edge of the content), that opens the panel upward from the same spot. */}
+      <div ref={panel} className="fixed bottom-[5.25rem] right-4 z-30 lg:hidden">
         <button
           type="button"
           aria-expanded={open}
           aria-controls="quick-dock-panel"
           onClick={() => setOpen(!open)}
-          className={`grid h-12 w-9 place-items-center rounded-l-xl bg-white text-ganga ring-1 ring-line shadow-[0_10px_28px_-10px_rgba(0,0,0,0.6)] transition-opacity duration-200 ${
+          className={`fab grid h-12 w-12 place-items-center rounded-full bg-white text-ganga ring-1 ring-line shadow-[0_10px_28px_-10px_rgba(0,0,0,0.6)] transition-opacity duration-200 ${
             open ? "pointer-events-none opacity-0" : "opacity-100"
           }`}
         >
@@ -95,7 +96,7 @@ export function QuickDockClient({ label, close, items }: { label: string; close:
           role="region"
           aria-label={label}
           hidden={!open}
-          className="absolute right-0 top-1/2 w-[min(19rem,calc(100vw-2rem))] -translate-y-1/2 overflow-hidden rounded-l-2xl bg-white shadow-[0_18px_44px_-12px_rgba(0,0,0,0.45)] ring-1 ring-line"
+          className="absolute bottom-0 right-0 w-[min(19rem,calc(100vw-2rem))] overflow-hidden rounded-2xl bg-white shadow-[0_18px_44px_-12px_rgba(0,0,0,0.45)] ring-1 ring-line"
         >
           <div className="flex items-center justify-between bg-ganga px-4 py-2.5 text-white">
             <p className="text-sm font-semibold">{label}</p>

@@ -63,11 +63,11 @@ export function IdealsView({ lang, category }: { lang: Lang; category: IdealCate
                         href={localePath(lang, categoryPath(c))}
                         aria-current={active ? "page" : undefined}
                         className={`flex items-center justify-between gap-3 rounded-xl px-4 py-3 font-medium transition-colors ${
-                          active ? "bg-saffron text-white" : "text-ink-2 hover:bg-sand hover:text-ink"
+                          active ? "bg-saffron-deep text-white" : "text-ink-2 hover:bg-sand hover:text-ink"
                         }`}
                       >
                         {c.name[lang]}
-                        <span className={`text-sm ${active ? "text-white/85" : "text-muted"}`}>{idealsIn(c.slug).length}</span>
+                        <span className={`text-sm ${active ? "text-white" : "text-muted"}`}>{idealsIn(c.slug).length}</span>
                       </Link>
                     </li>
                   );

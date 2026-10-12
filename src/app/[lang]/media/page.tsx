@@ -86,7 +86,7 @@ export default async function MediaPage({ params }: LangParams) {
               <a
                 key={a.id}
                 href={`#album-${a.id}`}
-                className="rounded-full border border-line bg-white px-4 py-2 text-[0.9rem] text-ink-2 transition-colors hover:border-saffron-deep hover:text-saffron-deep"
+                className="inline-flex min-h-11 items-center rounded-full border border-line bg-white px-4 py-2 text-[0.9rem] text-ink-2 transition-colors hover:border-saffron-deep hover:text-saffron-deep"
               >
                 {tr(a.title, lang)}
               </a>

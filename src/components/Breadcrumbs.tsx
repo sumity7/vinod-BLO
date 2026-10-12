@@ -25,7 +25,10 @@ export function Breadcrumbs({
                 </span>
               ) : (
                 <>
-                  <Link href={localePath(lang, crumb.path)} className="hover:text-saffron-deep">
+                  <Link
+                    href={localePath(lang, crumb.path)}
+                    className="-mx-2 inline-flex min-h-11 items-center px-2 hover:text-saffron-deep"
+                  >
                     {crumb.name}
                   </Link>
                   <ChevronRight aria-hidden="true" className="h-3.5 w-3.5" />

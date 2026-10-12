@@ -58,7 +58,7 @@ export function VideoShowcase({
               className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />
             <span className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/5" />
-            <span className="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-saffron text-white shadow-lg transition-transform group-hover:scale-110">
+            <span className="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-saffron-deep text-white shadow-lg transition-transform group-hover:scale-110">
               <Play aria-hidden="true" className="ml-1 h-7 w-7" fill="currentColor" />
             </span>
           </button>

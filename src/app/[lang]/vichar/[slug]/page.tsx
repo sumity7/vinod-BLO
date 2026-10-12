@@ -185,7 +185,7 @@ export default async function ArticlePage({ params }: Params) {
               <ul className="mt-3 space-y-2 text-sm">
                 {article.sources.map((s) => (
                   <li key={s.url}>
-                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="text-ganga underline decoration-line underline-offset-4 hover:decoration-saffron">
+                    <a href={s.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-ganga underline decoration-line underline-offset-4 hover:decoration-saffron">
                       {s.label}
                     </a>
                   </li>

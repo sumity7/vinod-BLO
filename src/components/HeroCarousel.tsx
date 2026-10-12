@@ -110,7 +110,7 @@ export function HeroCarousel({
                     </p>
                   )}
 
-                  <p style={after(3)} className={`${rise} mt-4 max-w-xl text-[1.05rem] leading-relaxed text-white/85 sm:text-lg`}>
+                  <p style={after(3)} className={`${rise} mt-4 max-w-xl text-[1.05rem] leading-relaxed text-white/85 max-sm:pr-12 sm:text-lg`}>
                     {s.description}
                   </p>
 
@@ -127,7 +127,7 @@ export function HeroCarousel({
                   <dl style={after(5)} className={`${rise} mt-7 grid max-w-2xl grid-cols-3 gap-3 border-t border-white/20 pt-4 sm:mt-8 sm:gap-6 sm:pt-5`}>
                     {s.facts.map((f) => (
                       <div key={f.k}>
-                        <dt className="text-xs text-white/65 sm:text-sm">{f.k}</dt>
+                        <dt className="text-xs text-white/80 sm:text-sm">{f.k}</dt>
                         <dd className="mt-1 text-sm font-semibold leading-snug sm:text-base">
                           <CountUp text={f.v} active={active} />
                         </dd>
@@ -185,12 +185,12 @@ export function HeroCarousel({
                     </div>
 
                     {count > 1 && (
-                      <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full bg-black/35 p-1 text-white backdrop-blur-md lg:bottom-24">
+                      <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1 rounded-full bg-black/35 p-0.5 text-white backdrop-blur-md lg:bottom-24">
                         <button
                           type="button"
                           onClick={() => go(index - 1)}
                           aria-label={labels.prev}
-                          className="grid h-9 w-9 place-items-center rounded-full transition-colors hover:bg-white/20"
+                          className="grid h-11 w-11 place-items-center rounded-full transition-colors hover:bg-white/20"
                         >
                           <ChevronLeft aria-hidden="true" className="h-5 w-5" />
                         </button>
@@ -201,7 +201,7 @@ export function HeroCarousel({
                             onClick={() => setIndex(j)}
                             aria-label={`${labels.goTo} ${j + 1}`}
                             aria-current={j === index}
-                            className="grid h-9 w-6 place-items-center"
+                            className="grid h-11 w-8 place-items-center"
                           >
                             <span
                               className={`block h-2 rounded-full bg-white transition-all duration-300 ${
@@ -214,7 +214,7 @@ export function HeroCarousel({
                           type="button"
                           onClick={() => go(index + 1)}
                           aria-label={labels.next}
-                          className="grid h-9 w-9 place-items-center rounded-full transition-colors hover:bg-white/20"
+                          className="grid h-11 w-11 place-items-center rounded-full transition-colors hover:bg-white/20"
                         >
                           <ChevronRight aria-hidden="true" className="h-5 w-5" />
                         </button>

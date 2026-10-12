@@ -66,7 +66,7 @@ export function StatCompare({ stat, lang, headingLevel = "h3" }: { stat: Stat; l
           <Icon aria-hidden="true" className="h-5 w-5" />
         </span>
         {r && r >= 1.15 && (
-          <span className="absolute right-4 top-4 rounded-full bg-saffron px-3 py-1 text-sm font-semibold text-white shadow-soft">
+          <span className="absolute right-4 top-4 rounded-full bg-saffron-deep px-3 py-1 text-sm font-semibold text-white shadow-soft">
             {fill(t.times, { x: num(Math.round(r * 10) / 10, lang) })}
           </span>
         )}

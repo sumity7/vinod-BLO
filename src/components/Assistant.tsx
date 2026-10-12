@@ -120,7 +120,7 @@ export function Assistant({ lang }: { lang: Lang }) {
           aria-label={t.title}
           className="drawer-in fixed bottom-[5.5rem] right-3 z-[60] flex h-[min(34rem,calc(100dvh-9rem))] w-[min(24rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-card border border-line bg-white shadow-[0_12px_40px_-8px_rgba(0,0,0,0.35)] sm:right-5"
         >
-          <header className="flex items-start justify-between gap-3 bg-saffron px-4 py-3 text-white">
+          <header className="flex items-start justify-between gap-3 bg-saffron-deep px-4 py-3 text-white">
             <h2 className="text-[0.95rem] font-semibold leading-snug">{t.title}</h2>
             <button
               type="button"
@@ -142,7 +142,7 @@ export function Assistant({ lang }: { lang: Lang }) {
                     <button
                       type="button"
                       onClick={() => ask(s)}
-                      className="rounded-full border border-saffron/60 bg-white px-3 py-1.5 text-left text-[0.85rem] text-saffron-deep transition-colors hover:bg-saffron hover:text-white"
+                      className="rounded-full border border-saffron/60 bg-white px-3 py-1.5 text-left text-[0.85rem] text-saffron-deep transition-colors hover:bg-saffron-deep hover:text-white"
                     >
                       {s}
                     </button>
@@ -155,7 +155,7 @@ export function Assistant({ lang }: { lang: Lang }) {
               <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
                 <p
                   className={`max-w-[88%] whitespace-pre-wrap px-3 py-2 leading-relaxed ${
-                    m.role === "user" ? "bg-saffron text-white" : "bg-white text-ink"
+                    m.role === "user" ? "bg-saffron-deep text-white" : "bg-white text-ink"
                   }`}
                 >
                   {m.content}
@@ -187,7 +187,7 @@ export function Assistant({ lang }: { lang: Lang }) {
               type="submit"
               disabled={busy || !text.trim()}
               aria-label={t.send}
-              className="grid h-10 w-10 shrink-0 place-items-center bg-saffron text-white transition-colors hover:bg-burnt disabled:opacity-50"
+              className="grid h-10 w-10 shrink-0 place-items-center bg-saffron-deep text-white transition-colors hover:bg-burnt disabled:opacity-50"
             >
               <Send aria-hidden="true" className="h-4 w-4" />
             </button>
@@ -200,7 +200,7 @@ export function Assistant({ lang }: { lang: Lang }) {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-label={t.open}
-        className="group fixed bottom-4 right-4 z-[60] inline-flex h-14 w-14 items-center justify-center gap-2.5 rounded-full bg-saffron-deep font-semibold text-white shadow-[0_10px_28px_-8px_rgba(0,0,0,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-burnt sm:bottom-5 sm:right-5 sm:h-12 sm:w-auto sm:px-5"
+        className="fab group fixed bottom-4 right-4 z-[60] inline-flex h-14 w-14 items-center justify-center gap-2.5 rounded-full bg-saffron-deep font-semibold text-white shadow-[0_10px_28px_-8px_rgba(0,0,0,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-burnt sm:bottom-5 sm:right-5 sm:h-12 sm:w-auto sm:px-5"
       >
         <MessageSquareText
           aria-hidden="true"

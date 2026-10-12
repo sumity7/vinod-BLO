@@ -63,7 +63,7 @@ export async function StayConnected({ lang }: { lang: Lang }) {
               <div className={`${PANEL} h-[500px]`}>
                 {/* Shown behind the plugin: it stays visible if Facebook does not load the timeline. */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-8 text-center">
-                  <span className="grid h-14 w-14 place-items-center rounded-full bg-saffron text-white">
+                  <span className="grid h-14 w-14 place-items-center rounded-full bg-saffron-deep text-white">
                     <FacebookIcon className="h-7 w-7" />
                   </span>
                   <p className="font-display text-xl font-semibold text-ink">{site.name[lang]}</p>
@@ -132,7 +132,7 @@ export async function StayConnected({ lang }: { lang: Lang }) {
                       rel="noopener noreferrer"
                       className="group card card-hover flex h-full items-center gap-3 p-3 sm:p-4"
                     >
-                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-soft bg-saffron text-white sm:h-12 sm:w-12">
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-soft bg-saffron-deep text-white sm:h-12 sm:w-12">
                         <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                       </span>
                       <span className="min-w-0">

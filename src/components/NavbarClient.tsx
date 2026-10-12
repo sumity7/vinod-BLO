@@ -248,7 +248,7 @@ export function NavbarClient({ lang, items, labels, logo, switcher }: Props) {
             <button
               ref={menuButton}
               type="button"
-              className="inline-flex h-10 min-w-10 items-center justify-center gap-2 rounded-soft border border-line px-2.5 font-semibold leading-none text-ink transition-[background-color,transform] duration-200 ease-[var(--ease-out)] hover:bg-sand active:scale-[0.97] xl:hidden"
+              className="inline-flex h-11 min-w-11 items-center justify-center gap-2 rounded-soft border border-line px-2.5 font-semibold leading-none text-ink transition-[background-color,transform] duration-200 ease-[var(--ease-out)] hover:bg-sand active:scale-[0.97] xl:hidden"
               aria-label={labels.menu}
               aria-expanded={drawer}
               aria-controls="mobile-menu"
@@ -288,7 +288,7 @@ export function NavbarClient({ lang, items, labels, logo, switcher }: Props) {
             type="button"
             onClick={closeAll}
             aria-label={labels.close}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-soft border border-line text-ink transition-[background-color,transform] duration-200 ease-[var(--ease-out)] hover:bg-sand active:scale-[0.97]"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-soft border border-line text-ink transition-[background-color,transform] duration-200 ease-[var(--ease-out)] hover:bg-sand active:scale-[0.97]"
           >
             <X aria-hidden="true" className="h-5 w-5" />
           </button>

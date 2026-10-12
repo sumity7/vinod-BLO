@@ -36,6 +36,7 @@ export default async function VicharPage({ params }: LangParams) {
         <div className="shell">
           <VicharList
             allLabel={t.vichar.all}
+            heading={t.nav.vicharAll}
             categories={cats}
             items={articles.map((a) => ({ id: a.slug, category: a.category, node: <ArticleCard article={a} lang={lang} /> }))}
           />

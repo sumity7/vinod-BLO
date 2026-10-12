@@ -9,16 +9,20 @@ import { useState, type ReactNode } from "react";
 export function VicharList({
   categories,
   allLabel,
+  heading,
   items,
 }: {
   categories: { id: string; label: string; count: number }[];
   allLabel: string;
+  /** Heading for the list, read by screen readers only: the cards below it are H3s, so they need an H2. */
+  heading: string;
   items: { id: string; category: string; node: ReactNode }[];
 }) {
   const [active, setActive] = useState<string>("all");
   const visible = active === "all" ? items : items.filter((i) => i.category === active);
   return (
     <>
+      <h2 className="sr-only">{heading}</h2>
       <div role="group" aria-label={allLabel} className="flex flex-wrap gap-2">
         <button type="button" className="chip" aria-pressed={active === "all"} onClick={() => setActive("all")}>
           {allLabel} <span className="text-sm text-muted">{items.length}</span>
