@@ -13,8 +13,8 @@ export const homeSeo: PageSeo = {
     hi: "विनोद कुमार उपाध्याय | ब्लॉक प्रमुख, हरहुआ, वाराणसी",
   },
   description: {
-    en: "Official website of Vinod Kumar Upadhyay, Block Pramukh of Harhua Block, Varanasi (Shivpur Assembly Constituency): his journey, development work, social service, media and contact.",
-    hi: "विनोद कुमार उपाध्याय, ब्लॉक प्रमुख, हरहुआ ब्लॉक, वाराणसी (शिवपुर विधानसभा क्षेत्र) की आधिकारिक वेबसाइट: उनकी यात्रा, विकास कार्य, सामाजिक सेवा, मीडिया और संपर्क।",
+    en: "Official website of Vinod Kumar Upadhyay ‘Babbu’, senior BJP worker and Block Pramukh of Harhua, Varanasi (Shivpur): his journey, work, events and contact.",
+    hi: "विनोद कुमार उपाध्याय ‘बब्बू’, वरिष्ठ भाजपा कार्यकर्ता एवं ब्लॉक प्रमुख, हरहुआ, वाराणसी (शिवपुर) की आधिकारिक वेबसाइट: उनकी यात्रा, कार्य, कार्यक्रम और संपर्क।",
   },
 };
 
@@ -25,8 +25,8 @@ export const pageSeo = {
       hi: "विनोद कुमार उपाध्याय | जीवन परिचय और राजनीतिक यात्रा",
     },
     description: {
-      en: "Biography of Vinod Kumar Upadhyay, Block Pramukh of Harhua, Varanasi: his responsibilities, vision and political journey from booth level to Block Pramukh.",
-      hi: "ब्लॉक प्रमुख, हरहुआ, वाराणसी विनोद कुमार उपाध्याय का जीवन परिचय: दायित्व, दृष्टि और बूथ स्तर से ब्लॉक प्रमुख तक की राजनीतिक यात्रा।",
+      en: "Biography of Vinod Kumar Upadhyay ‘Babbu’: born in Goithaha, Varanasi, educated in Kashi, BJP worker from 18, elected Block Pramukh of Harhua unopposed in 2021.",
+      hi: "विनोद कुमार उपाध्याय ‘बब्बू’ का जीवन परिचय: वाराणसी के गोइठहां गाँव में जन्म, काशी में शिक्षा, 18 वर्ष से भाजपा में, 2021 में हरहुआ के निर्विरोध ब्लॉक प्रमुख।",
     },
   },
   publicLife: {

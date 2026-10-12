@@ -1,4 +1,4 @@
-import { aboutPreview, biography, introduction, quickFacts } from "@/content/profile";
+import { biography, introduction, quickFacts } from "@/content/profile";
 import { ownRoles, steps } from "@/content/journey";
 import { meetingPhotos } from "@/content/media";
 import { updateCategories, updates } from "@/content/updates";
@@ -17,9 +17,6 @@ function knowledge(lang: Lang): string {
   out.push(`ROLE: ${t(site.role)}; ${t(site.constituency)}`);
   out.push(`INTRODUCTION: ${t(introduction)}`);
   out.push("QUICK FACTS:\n" + quickFacts.map((f) => `- ${t(f.label)}: ${t(f.value)}`).join("\n"));
-  // The biography written on the home page: where he was born and schooled, his place in the party, and how
-  // he became Block Pramukh. Kept in step with the page because it is the same text.
-  out.push("BIOGRAPHY AS WRITTEN ON THE HOME PAGE:\n" + aboutPreview.map((p) => `- ${t(p)}`).join("\n"));
   for (const section of biography) {
     out.push(`${t(section.title).toUpperCase()}:\n` + section.body.map((p) => `- ${t(p)}`).join("\n"));
   }

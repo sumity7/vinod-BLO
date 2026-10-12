@@ -151,20 +151,45 @@ export function websiteLd(lang: Lang, description: string) {
 }
 
 export function personLd(lang: Lang, description: string) {
+  const say = (v: L) => v[lang];
+  const org = (name: L, url?: string) => ({ "@type": "Organization", name: say(name), ...(url ? { url } : {}) });
   return {
     "@context": "https://schema.org",
     "@type": "Person",
     "@id": personId,
     name: site.name[lang],
-    alternateName: [site.name.en, site.name.hi],
+    alternateName: [site.name.en, site.name.hi, "Vinod Kumar Upadhyay ‘Babbu’", "विनोद कुमार उपाध्याय ‘बब्बू’"],
+    givenName: say({ en: "Vinod Kumar", hi: "विनोद कुमार" }),
+    familyName: say({ en: "Upadhyay", hi: "उपाध्याय" }),
     url: absoluteUrl(localePath(lang)),
     image: absoluteUrl("/images/leader-portrait-saffron.webp"),
     description,
     jobTitle: site.role[lang],
-    memberOf: { "@type": "Organization", name: "Bharatiya Janata Party" },
+    hasOccupation: {
+      "@type": "Occupation",
+      name: say({ en: "Block Pramukh", hi: "ब्लॉक प्रमुख" }),
+      occupationLocation: {
+        "@type": "AdministrativeArea",
+        name: say({ en: "Harhua Block, Varanasi, Uttar Pradesh, India", hi: "हरहुआ ब्लॉक, वाराणसी, उत्तर प्रदेश, भारत" }),
+      },
+    },
+    birthPlace: {
+      "@type": "Place",
+      name: say({ en: "Goithaha, Varanasi, Uttar Pradesh, India", hi: "गोइठहां, वाराणसी, उत्तर प्रदेश, भारत" }),
+    },
+    homeLocation: { "@type": "Place", name: say({ en: "Varanasi, Uttar Pradesh, India", hi: "वाराणसी, उत्तर प्रदेश, भारत" }) },
+    nationality: { "@type": "Country", name: say({ en: "India", hi: "भारत" }) },
+    memberOf: [
+      org({ en: "Bharatiya Janata Party", hi: "भारतीय जनता पार्टी" }, "https://www.bjp.org"),
+      org({ en: "Rashtriya Swayamsevak Sangh", hi: "राष्ट्रीय स्वयंसेवक संघ" }, "https://www.rss.org"),
+    ],
+    affiliation: [
+      org({ en: "Late Vaijanti Devi Memorial Trust, Varanasi", hi: "स्व० वैजंती देवी मेमोरियल ट्रस्ट, वाराणसी" }),
+      org({ en: "Divyanand Prem Seva Mission, Haridwar", hi: "दिव्यानंद प्रेम सेवा मिशन, हरिद्वार" }),
+    ],
     workLocation: {
       "@type": "Place",
-      name: "Harhua Block, Varanasi, Uttar Pradesh, India",
+      name: say({ en: "Harhua Block, Shivpur Assembly Constituency, Varanasi, Uttar Pradesh, India", hi: "हरहुआ ब्लॉक, शिवपुर विधानसभा क्षेत्र, वाराणसी, उत्तर प्रदेश, भारत" }),
     },
     sameAs: site.socials.map((s) => s.href),
   };

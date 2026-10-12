@@ -50,19 +50,15 @@ export const biography: { id: string; title: L; body: L[] }[] = [
   {
     id: "profile",
     title: { en: "Personal profile", hi: "व्यक्तिगत परिचय" },
+    // The home page's biography, with his years in the Sangh and the party between its paragraphs.
     body: [
-      {
-        en: "Vinod Kumar Upadhyay is the Block Pramukh of Harhua Block, Varanasi district. Since childhood he has been drawn to nationalist thought, social service and organisational work.",
-        hi: "विनोद कुमार उपाध्याय हरहुआ ब्लॉक, जनपद वाराणसी के ब्लॉक प्रमुख हैं। बचपन से ही राष्ट्रवादी विचारधारा, सामाजिक सेवा और संगठनात्मक कार्यों के प्रति उनका विशेष झुकाव रहा है।",
-      },
+      aboutPreview[0],
       {
         en: "Through the shakhas of the Rashtriya Swayamsevak Sangh from a young age, he absorbed discipline, service, values and patriotism. He joined the Bharatiya Janata Party at 18, beginning an active political life, and has played an active role in strengthening the organisation at booth, sector, mandal and regional levels.",
         hi: "बाल्यकाल से राष्ट्रीय स्वयंसेवक संघ की शाखाओं से जुड़कर उन्होंने अनुशासन, सेवा, संस्कार और राष्ट्रभक्ति की भावना को आत्मसात किया। 18 वर्ष की आयु में भारतीय जनता पार्टी की सदस्यता ग्रहण कर सक्रिय राजनीतिक जीवन की शुरुआत की और बूथ, सेक्टर, मंडल एवं क्षेत्रीय स्तर पर संगठन को मज़बूत करने में सक्रिय भूमिका निभाई।",
       },
-      {
-        en: "Taking service to the last person in society, and working steadily to resolve people’s problems, is the central aim of his public life.",
-        hi: "समाज के अंतिम व्यक्ति तक सेवा पहुँचाना और जनसमस्याओं के समाधान के लिए निरंतर प्रयास करना उनके सार्वजनिक जीवन का मुख्य उद्देश्य है।",
-      },
+      aboutPreview[1],
+      aboutPreview[2],
     ],
   },
   {

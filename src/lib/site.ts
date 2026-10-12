@@ -2,7 +2,7 @@ import type { L } from "./i18n";
 
 // Set NEXT_PUBLIC_SITE_URL to the live domain. Until a custom domain is chosen, the live
 // Vercel address is used, so link previews (WhatsApp, Facebook) and search engines get a real URL.
-const PRODUCTION_URL = "https://vinod-jet.vercel.app";
+const PRODUCTION_URL = "https://vinod-blo.vercel.app";
 
 /**
  * Canonical origin for every absolute URL (canonical links, hreflang, Open Graph, sitemap, robots,
@@ -12,9 +12,17 @@ const PRODUCTION_URL = "https://vinod-jet.vercel.app";
 function resolveSiteUrl() {
   const fromEnv = (process.env.NEXT_PUBLIC_SITE_URL ?? "").trim().replace(/\/$/, "");
   if (!fromEnv) return process.env.NODE_ENV === "production" ? PRODUCTION_URL : "http://localhost:3000";
-  // Preview deployments (random *.vercel.app names) and localhost never leak into production URLs.
-  if (process.env.NODE_ENV === "production" && !/^https:\/\/(?!localhost)/.test(fromEnv)) {
-    return PRODUCTION_URL;
+  // Only a real https domain is accepted in production: never localhost, plain http, or another
+  // *.vercel.app name (a preview deployment, or an older project left in an env var).
+  if (process.env.NODE_ENV === "production") {
+    let host = "";
+    try {
+      const u = new URL(fromEnv);
+      host = u.protocol === "https:" ? u.hostname : "";
+    } catch {}
+    if (!host || host === "localhost" || (host.endsWith(".vercel.app") && fromEnv !== PRODUCTION_URL)) {
+      return PRODUCTION_URL;
+    }
   }
   return fromEnv;
 }
