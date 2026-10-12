@@ -3,6 +3,7 @@ import { getDict } from "@/content/ui";
 import { tr, type Lang } from "@/lib/i18n";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
+import { CountUp } from "./CountUp";
 import { Timeline, TimelineItem } from "./Timeline";
 
 /**
@@ -30,7 +31,7 @@ export function Milestones({ lang }: { lang: Lang }) {
                 tone={s.current ? "ink" : "saffron"}
                 className="pb-10"
               >
-                <Reveal>
+                <div>
                   <p className="label">
                     {s.current ? m.current : `${m.step} ${i + 1}`}
                   </p>
@@ -38,7 +39,7 @@ export function Milestones({ lang }: { lang: Lang }) {
                     {tr(s.title, lang)}
                     {s.badge && (
                       <span className="ml-3 inline-block rounded-full border border-saffron px-2.5 py-0.5 align-middle font-sans text-xs font-semibold text-saffron-deep">
-                        {tr(s.badge, lang)}
+                        <CountUp text={tr(s.badge, lang)} />
                       </span>
                     )}
                   </h3>
@@ -55,7 +56,7 @@ export function Milestones({ lang }: { lang: Lang }) {
                       ))}
                     </ul>
                   )}
-                </Reveal>
+                </div>
               </TimelineItem>
             ))}
           </Timeline>

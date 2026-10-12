@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { CountUp } from "./CountUp";
 
 export type HeroSlideView = {
   id: string;
@@ -60,6 +61,9 @@ export function HeroCarousel({
           const active = i === index;
           // One h1 per page: the first slide carries it, the others are h2.
           const Heading = i === 0 ? "h1" : "h2";
+          // The parts of the current slide fade up one after another; each gets its own delay.
+          const rise = active ? "hero-rise" : "";
+          const after = (n: number) => ({ "--d": `${0.08 + n * 0.09}s` }) as CSSProperties;
           return (
             <div
               key={s.id}
@@ -73,30 +77,32 @@ export function HeroCarousel({
               }`}
             >
               <div className={`shell grid min-h-[calc(100svh-4.5rem)] gap-6 py-6 ${s.image.cutout ? "content-center" : "content-start"} lg:min-h-[clamp(32rem,calc(100svh-5rem),68rem)] lg:grid-cols-12 lg:grid-rows-1 lg:content-stretch lg:items-center lg:gap-12 lg:py-8`}>
-                <div
-                  className={`order-2 transition-[opacity,transform] delay-100 duration-700 ease-[var(--ease-out)] lg:order-1 lg:col-span-7 ${
-                    active ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
-                  }`}
-                >
-                  <p className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-sm font-medium">
+                <div className="order-2 lg:order-1 lg:col-span-7">
+                  <p
+                    style={after(0)}
+                    className={`${rise} inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-sm font-medium`}
+                  >
                     <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-saffron" />
                     {s.eyebrow}
                   </p>
 
                   <Heading
                     id={i === 0 ? "hero-title" : undefined}
+                    style={after(1)}
                     // The name on the first slide is the largest type; later slides carry a phrase and sit a size smaller.
-                    className={`font-display mt-4 ${i === 0 ? "text-[clamp(2.6rem,1.5rem+4.6vw,5.25rem)]" : "text-[clamp(2.3rem,1.3rem+3.6vw,4.25rem)]"} font-normal leading-[1] tracking-[-0.01em] [:lang(hi)_&]:leading-[1.2] [:lang(hi)_&]:tracking-normal`}
+                    className={`${rise} font-display mt-4 ${i === 0 ? "text-[clamp(2.6rem,1.5rem+4.6vw,5.25rem)]" : "text-[clamp(2.3rem,1.3rem+3.6vw,4.25rem)]"} font-normal leading-[1] tracking-[-0.01em] [:lang(hi)_&]:leading-[1.2] [:lang(hi)_&]:tracking-normal`}
                   >
-                    {s.title.map((line) => (
-                      <span key={line} className="block">
-                        {line}
-                      </span>
+                    {s.title.map((line, n) => (
+                      <Fragment key={line}>
+                        {/* A real space between the lines, so the name reads as two words to screen readers and in the tab title. */}
+                        {n > 0 && " "}
+                        <span className="block">{line}</span>
+                      </Fragment>
                     ))}
                   </Heading>
 
                   {s.subtitle && (
-                    <p className="mt-3 text-lg font-medium text-peach sm:text-2xl">
+                    <p style={after(2)} className={`${rise} mt-3 text-lg font-medium text-peach sm:text-2xl`}>
                       {s.subtitle}
                       {s.subtitleNote && (
                         <span className="ml-2 inline-block text-[0.95rem] font-normal text-white/80 sm:text-lg">({s.subtitleNote})</span>
@@ -104,11 +110,11 @@ export function HeroCarousel({
                     </p>
                   )}
 
-                  <p className="mt-4 max-w-xl text-[1.05rem] leading-relaxed text-white/85 sm:text-lg">
+                  <p style={after(3)} className={`${rise} mt-4 max-w-xl text-[1.05rem] leading-relaxed text-white/85 sm:text-lg`}>
                     {s.description}
                   </p>
 
-                  <div className="mt-7 flex flex-wrap gap-3">
+                  <div style={after(4)} className={`${rise} mt-7 flex flex-wrap gap-3`}>
                     <Link href={s.primary.href} className="btn btn-white">
                       {s.primary.label}
                       <ArrowRight aria-hidden="true" className="h-4 w-4" />
@@ -118,11 +124,13 @@ export function HeroCarousel({
                     </Link>
                   </div>
 
-                  <dl className="mt-7 grid max-w-2xl grid-cols-3 gap-3 border-t border-white/20 pt-4 sm:mt-8 sm:gap-6 sm:pt-5">
+                  <dl style={after(5)} className={`${rise} mt-7 grid max-w-2xl grid-cols-3 gap-3 border-t border-white/20 pt-4 sm:mt-8 sm:gap-6 sm:pt-5`}>
                     {s.facts.map((f) => (
                       <div key={f.k}>
                         <dt className="text-xs text-white/65 sm:text-sm">{f.k}</dt>
-                        <dd className="mt-1 text-sm font-semibold leading-snug sm:text-base">{f.v}</dd>
+                        <dd className="mt-1 text-sm font-semibold leading-snug sm:text-base">
+                          <CountUp text={f.v} active={active} />
+                        </dd>
                       </div>
                     ))}
                   </dl>
@@ -152,11 +160,11 @@ export function HeroCarousel({
                         its left edge stays in the gap beside the text and it grows only rightwards, to the
                         window edge, then shrinks (standing on its foot) rather than cover the text. */}
                     <div
-                      className={
+                      className={`${active ? "hero-zoom" : ""} ${
                         s.image.cutout
-                          ? "absolute bottom-0 left-1/2 h-full -translate-x-1/2 lg:-bottom-8 lg:left-[-1.5rem] lg:h-[calc(100%+3.5rem)] lg:max-w-[calc(100%_+_3.5rem_+_max(0px,_(100vw_-_90rem)_/_2))] lg:translate-x-0"
+                          ? "origin-bottom absolute bottom-0 left-1/2 h-full -translate-x-1/2 lg:-bottom-8 lg:left-[-1.5rem] lg:h-[calc(100%+3.5rem)] lg:max-w-[calc(100%_+_3.5rem_+_max(0px,_(100vw_-_90rem)_/_2))] lg:translate-x-0"
                           : "absolute inset-0"
-                      }
+                      }`}
                       style={s.image.cutout ? { aspectRatio: s.image.ratio } : undefined}
                     >
                       <Image

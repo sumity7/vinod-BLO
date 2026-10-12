@@ -5,6 +5,7 @@ import { getDict } from "@/content/ui";
 import { localePath, tr, type Lang } from "@/lib/i18n";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
+import { CountUp } from "./CountUp";
 import { Timeline, TimelineItem } from "./Timeline";
 
 /**
@@ -65,7 +66,9 @@ export function PoliticalJourney({
                 {highlights.map((p, i) => (
                   <TimelineItem key={p.label.en} last={i === highlights.length - 1} className="pb-8">
                     <p className="font-display text-xl font-semibold text-saffron-deep">{tr(p.label, lang)}</p>
-                    <p className="mt-1 font-display text-lg font-semibold">{tr(p.title, lang)}</p>
+                    <p className="mt-1 font-display text-lg font-semibold">
+                      <CountUp text={tr(p.title, lang)} />
+                    </p>
                     <p className="mt-1 text-[0.95rem] text-ink-2">{tr(p.body, lang)}</p>
                   </TimelineItem>
                 ))}

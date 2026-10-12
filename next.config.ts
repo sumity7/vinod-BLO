@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   images: {
     formats: ["image/avif", "image/webp"],
+    // Nothing on the site is shown wider than 1920px, so Next never generates (or falls back to) a 3840px
+    // version. Every <Image> also carries `sizes`, so the browser asks for the width it really needs.
+    deviceSizes: [360, 480, 640, 768, 1024, 1280, 1600, 1920],
+    imageSizes: [32, 64, 96, 128, 176, 256, 384],
     // 75 for site photographs; 90 for the YouTube poster frame, which is shown large.
     qualities: [75, 90],
     remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" }],

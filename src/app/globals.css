@@ -77,6 +77,8 @@
 
 html {
   overflow-x: clip;
+  /* The scrollbar's room is always kept, so opening the menu (which locks scrolling) cannot move the page. */
+  scrollbar-gutter: stable;
   font-size: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
@@ -138,6 +140,18 @@ h4 {
   outline: 2px solid var(--saffron-deep);
   outline-offset: 3px;
   border-radius: 2px;
+}
+
+/* Icons keep their size inside flex rows and never squeeze beside long Devanagari text. */
+.lucide {
+  flex-shrink: 0;
+}
+/* No grey flash when a button or link is tapped on a phone. */
+a,
+button,
+summary,
+label {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .on-dark :focus-visible,
@@ -301,11 +315,13 @@ h4 {
   -webkit-tap-highlight-color: transparent;
 }
 .btn svg {
+  flex-shrink: 0;
   transition: transform 0.3s var(--ease-out);
 }
-/* The button stays where it is on hover (it only changes colour and gains a soft shadow), so the
-   layout never seems to move under the pointer. Pressing it dips a little, then it eases back. */
+/* Hover: a 1px lift and a soft shadow. Press: a small dip, then it eases back. Only transform and
+   shadow change, so no neighbour ever moves. */
 .btn:hover {
+  transform: translateY(-1px);
   box-shadow: 0 6px 16px -8px rgba(60, 30, 10, 0.45);
 }
 .btn:hover svg {
@@ -460,6 +476,103 @@ h4 {
   animation: fade 0.35s ease-out both;
 }
 
+/* Hero: each part fades up in turn when its slide becomes the current one (--d is its delay), and the
+   portrait settles from a slight zoom. Transform and opacity only. */
+.hero-rise {
+  animation: rise 0.7s var(--ease-out) both;
+  animation-delay: var(--d, 0s);
+}
+.hero-zoom {
+  animation: hero-zoom 1.8s var(--ease-out) both;
+}
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* Nav underline: always in the DOM, drawn by scaling it in, so nothing ever changes size. */
+.nav-underline {
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0.6;
+  transition:
+    transform 0.35s var(--ease-out),
+    opacity 0.25s var(--ease-out);
+}
+.nav-underline[data-active="true"] {
+  transform: scaleX(1);
+  opacity: 1;
+}
+.group\/link:hover .nav-underline {
+  transform: scaleX(1);
+}
+
+/* Political journey: the markers pop in and the connecting lines draw downward, one item after the
+   next (the delay is set per item by Timeline). Only hidden once JS runs and when motion is welcome. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] .tl-body {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.6s var(--ease-out),
+      transform 0.6s var(--ease-out);
+    transition-delay: calc(var(--tl-delay, 0s) + 0.12s);
+  }
+  html[data-js] .tl-dot {
+    opacity: 0;
+    transform: scale(0.4);
+    transition:
+      opacity 0.35s var(--ease-out),
+      transform 0.45s var(--ease-out);
+    transition-delay: var(--tl-delay, 0s);
+  }
+  html[data-js] .tl-line {
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: top;
+    transition: transform 0.8s var(--ease-out);
+    transition-delay: calc(var(--tl-delay, 0s) + 0.25s);
+  }
+  html[data-js] .tl-item.is-shown .tl-body {
+    opacity: 1;
+    transform: none;
+  }
+  html[data-js] .tl-item.is-shown .tl-dot {
+    opacity: 1;
+    transform: none;
+  }
+  html[data-js] .tl-item.is-shown .tl-line {
+    transform: translateX(-50%) scaleY(1);
+  }
+}
+
+/* Count-up: the final figure always sits in the layout (so the box has its final width from the start);
+   while counting, a copy on top shows the running number. Without JS only the final figure is shown. */
+.count {
+  position: relative;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+.count-live {
+  display: none;
+}
+html[data-js] .count-live {
+  display: block;
+  position: absolute;
+  inset: 0 auto auto 0;
+  white-space: nowrap;
+  opacity: 0;
+}
+html[data-js] .count.is-on .count-live {
+  opacity: 1;
+}
+html[data-js] .count.is-on .count-final {
+  opacity: 0;
+}
+
 /* Page to page: the old page fades out and the new one fades in over it, with a very small rise.
    The header is named, so it stays put and is not part of the fade. */
 ::view-transition-old(.page-out) {
@@ -580,6 +693,8 @@ html[data-js] .reveal.is-shown {
     scroll-behavior: auto;
   }
   .rise,
+  .hero-rise,
+  .hero-zoom,
   .portrait-in,
   .page-in,
   .drawer-in {
