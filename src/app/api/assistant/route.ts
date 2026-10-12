@@ -3,6 +3,8 @@ import { systemPrompt } from "@/lib/assistant";
 import { isLang, type Lang } from "@/lib/i18n";
 
 export const runtime = "nodejs";
+// Room for one wait-and-retry when Groq is at its per-minute limit.
+export const maxDuration = 60;
 
 /**
  * The website assistant. It answers questions about Vinod Kumar Upadhyay's work from the site's
@@ -61,20 +63,38 @@ export async function POST(request: Request) {
   const key = process.env.GROQ_API_KEY?.trim();
   if (!key) return NextResponse.json({ error: "not_configured" }, { status: 503 });
 
-  try {
-    const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+  const payload = JSON.stringify({
+    model: MODEL,
+    // Groq counts the room asked for toward its per-minute token limit, so ask for no more than a
+    // short answer needs; a larger figure makes two visitors in a minute enough to hit the limit.
+    max_tokens: 800,
+    temperature: 0.3,
+    // Short chat answers do not need long reasoning; low effort keeps replies fast.
+    reasoning_effort: "low",
+    messages: [{ role: "system", content: systemPrompt(lang) }, ...turns],
+  });
+  const call = () =>
+    fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
-      body: JSON.stringify({
-        model: MODEL,
-        max_tokens: 1200,
-        temperature: 0.3,
-        // Short chat answers do not need long reasoning; low effort keeps replies fast.
-        reasoning_effort: "low",
-        messages: [{ role: "system", content: systemPrompt(lang) }, ...turns],
-      }),
+      body: payload,
       signal: AbortSignal.timeout(25_000),
     });
+
+  try {
+    let res = await call();
+    // The free tier limits tokens per minute. While it says to wait a few seconds, wait and try again
+    // (several visitors at once can each need a turn), so a visitor sees a slower answer, not an error.
+    let waited = 0;
+    for (let tries = 0; res.status === 429 && tries < 3; tries++) {
+      // The header is rounded and can be shorter than the wait the message itself gives.
+      const said = (await res.clone().text().catch(() => "")).match(/try again in ([0-9.]+)s/)?.[1];
+      const wait = Math.max(Number(res.headers.get("retry-after")) || 0, Number(said) || 0, 1);
+      if (waited + wait > 25) break;
+      waited += wait;
+      await new Promise((r) => setTimeout(r, wait * 1000 + 250));
+      res = await call();
+    }
 
     if (!res.ok) {
       // Log the reason for the site owner; never send details back to the visitor.
