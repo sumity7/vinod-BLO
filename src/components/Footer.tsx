@@ -4,7 +4,7 @@ import { getDict } from "@/content/ui";
 import { localePath, type Lang } from "@/lib/i18n";
 import { buildNav } from "@/lib/nav";
 import { site } from "@/lib/site";
-import { PartnerAd } from "./PartnerAd";
+import { SiteCredit } from "./SiteCredit";
 import { socialIcons } from "./icons";
 
 /**
@@ -80,14 +80,14 @@ export function Footer({ lang }: { lang: Lang }) {
       </div>
 
       <div className="border-t border-white/20">
-        {/* One row: copyright on the left, the sponsor pill on the right with room beside it for the
+        {/* One row: copyright on the left, the website credit on the right with room beside it for the
             assistant button, which is fixed to the bottom-right corner on the same line. */}
         <div className="shell flex flex-col gap-4 pb-24 pt-5 text-sm text-white/90 sm:flex-row sm:items-center sm:justify-between sm:py-5 lg:pb-5">
           <p>
             © {year} {site.name[lang]}. {d.footer.rights}
           </p>
           <div className="sm:mr-44 lg:mr-52">
-            <PartnerAd lang={lang} />
+            <SiteCredit lang={lang} />
           </div>
         </div>
       </div>

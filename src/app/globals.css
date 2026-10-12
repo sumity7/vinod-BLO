@@ -694,15 +694,6 @@ html[data-js] .reveal.is-shown {
   animation: drawer-in 0.25s var(--ease-out) both;
 }
 
-@keyframes ad-shine {
-  from {
-    transform: translateX(-120%) skewX(-18deg);
-  }
-  to {
-    transform: translateX(420%) skewX(-18deg);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
