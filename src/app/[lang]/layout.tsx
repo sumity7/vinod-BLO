@@ -11,6 +11,7 @@ import { personLd, websiteLd } from "@/lib/seo";
 import { Navbar } from "@/components/Navbar";
 import { Assistant } from "@/components/Assistant";
 import { Footer } from "@/components/Footer";
+import { NavProgress } from "@/components/NavProgress";
 import { QuickDock } from "@/components/QuickDock";
 import { ScrollManager } from "@/components/ScrollManager";
 import { markJsScript, reloadToTopScript } from "@/lib/scrollScript";
@@ -98,6 +99,7 @@ export default async function LangLayout({
       <body>
         <script dangerouslySetInnerHTML={{ __html: markJsScript + reloadToTopScript }} />
         <ScrollManager />
+        <NavProgress />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink focus:px-4 focus:py-2 focus:text-white"

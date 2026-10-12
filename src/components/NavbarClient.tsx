@@ -131,6 +131,8 @@ export function NavbarClient({ lang, items, labels, logo, switcher }: Props) {
     <>
       <header
         ref={stripRef}
+        // Named, so the page transition leaves it fixed (see globals.css).
+        style={{ viewTransitionName: "site-header" }}
         className={`sticky top-0 z-50 border-b bg-white/90 backdrop-blur-md transition-[box-shadow,border-color] duration-300 ${
           scrolled ? "border-transparent shadow-[0_10px_30px_-18px_rgba(60,30,10,0.45)]" : "border-line shadow-none"
         }`}

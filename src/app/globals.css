@@ -292,24 +292,29 @@ h4 {
   line-height: 1.2;
   border: 1px solid transparent;
   transition:
-    background-color 0.2s var(--ease-out),
-    color 0.2s var(--ease-out),
-    border-color 0.2s var(--ease-out),
-    box-shadow 0.25s var(--ease-out),
-    transform 0.25s var(--ease-out);
+    background-color 0.25s var(--ease-out),
+    color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out),
+    box-shadow 0.3s var(--ease-out),
+    transform 0.18s var(--ease-out);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 .btn svg {
-  transition: transform 0.25s var(--ease-out);
+  transition: transform 0.3s var(--ease-out);
 }
+/* The button stays where it is on hover (it only changes colour and gains a soft shadow), so the
+   layout never seems to move under the pointer. Pressing it dips a little, then it eases back. */
 .btn:hover {
-  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -8px rgba(60, 30, 10, 0.45);
 }
 .btn:hover svg {
   transform: translateX(2px);
 }
 .btn:active {
-  transform: none;
+  transform: scale(0.97);
+  box-shadow: none;
+  transition-duration: 0.12s;
 }
 .btn-sm {
   min-height: 2.5rem;
@@ -453,6 +458,83 @@ h4 {
 }
 .page-in {
   animation: fade 0.35s ease-out both;
+}
+
+/* Page to page: the old page fades out and the new one fades in over it, with a very small rise.
+   The header is named, so it stays put and is not part of the fade. */
+::view-transition-old(.page-out) {
+  animation: 0.22s cubic-bezier(0.4, 0, 1, 1) both vt-fade reverse;
+}
+::view-transition-new(.page-in-soft) {
+  animation:
+    0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both vt-fade,
+    0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both vt-rise;
+}
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes vt-rise {
+  from {
+    transform: translateY(8px);
+  }
+  to {
+    transform: none;
+  }
+}
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+/* The line along the top while a page is on its way (see NavProgress). It always sits full width and
+   fades out; while running it grows quickly at first, then slows, and stops short of the end until
+   the page arrives. */
+.nav-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 70;
+  height: 3px;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--saffron), var(--marigold));
+  transform-origin: left;
+  opacity: 0;
+  transition: opacity 0.35s ease 0.1s;
+}
+.nav-progress[data-run="true"] {
+  opacity: 1;
+  transition: none;
+  animation: nav-progress 8s cubic-bezier(0.1, 0.7, 0.2, 1) both;
+}
+@keyframes nav-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(0.88);
+  }
+}
+
+/* Let clicks reach the live page while a transition runs. */
+::view-transition {
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
 }
 
 /* Scroll reveal. Content is only hidden once the inline script has marked the page as running JS,
