@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { personLd, websiteLd } from "@/lib/seo";
 import { Navbar } from "@/components/Navbar";
 import { Assistant } from "@/components/Assistant";
+import { BootScript } from "@/components/BootScript";
 import { Footer } from "@/components/Footer";
 import { NavProgress } from "@/components/NavProgress";
 import { ScrollDirection } from "@/components/ScrollDirection";
@@ -98,7 +99,7 @@ export default async function LangLayout({
       suppressHydrationWarning
     >
       <body>
-        <script dangerouslySetInnerHTML={{ __html: markJsScript + reloadToTopScript }} />
+        <BootScript code={markJsScript + reloadToTopScript} />
         <ScrollManager />
         <NavProgress />
         <ScrollDirection />
