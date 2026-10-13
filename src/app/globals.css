@@ -774,6 +774,8 @@ html[data-js] .reveal.is-shown {
   footer p a {
     display: inline-flex;
     align-items: center;
+    /* Text links are as wide as their text, so this only centres the round social icons in their circles. */
+    justify-content: center;
     min-height: 2.75rem;
   }
 }
