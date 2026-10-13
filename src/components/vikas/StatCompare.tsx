@@ -97,7 +97,7 @@ export function StatCompare({ stat, lang, headingLevel = "h3" }: { stat: Stat; l
           </div>
         )}
 
-        {stat.note && <p className="mt-4 text-sm leading-relaxed text-ink-2">{stat.note[lang]}</p>}
+        {stat.note && <p className="mt-4 text-sm leading-relaxed text-ink-2 text-justify hyphens-auto">{stat.note[lang]}</p>}
         <div className="mt-auto pt-5">
           <p className="border-t border-line pt-4 text-xs leading-relaxed text-muted">
             {t.source}:{" "}

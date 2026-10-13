@@ -69,7 +69,7 @@ export function PoliticalJourney({
                     <p className="mt-1 font-display text-lg font-semibold">
                       <CountUp text={tr(p.title, lang)} />
                     </p>
-                    <p className="mt-1 text-[0.95rem] text-ink-2">{tr(p.body, lang)}</p>
+                    <p className="mt-1 text-[0.95rem] text-ink-2 text-justify hyphens-auto">{tr(p.body, lang)}</p>
                   </TimelineItem>
                 ))}
               </Timeline>

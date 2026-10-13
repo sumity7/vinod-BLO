@@ -34,7 +34,7 @@ export function About({ lang }: { lang: Lang }) {
           <h2 id="about-title" className="h-section">
             {d.nav.biography}
           </h2>
-          <div className="mt-6 max-w-[72ch] space-y-4 leading-[1.8] text-ink-2 [text-wrap:pretty]">
+          <div className="mt-6 max-w-[72ch] space-y-4 leading-[1.8] text-ink-2 text-justify hyphens-auto [text-wrap:pretty]">
             {aboutPreview.map((p) => (
               <p key={p.en}>{tr(p, lang)}</p>
             ))}

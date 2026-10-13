@@ -155,7 +155,7 @@ export function UpdateCard({
             {tr(update.title, lang)}
           </Link>
         </Heading>
-        <p className={`mt-3 leading-relaxed text-ink-2 ${feature ? "" : "flex-1"}`}>
+        <p className={`mt-3 leading-relaxed text-ink-2 text-justify hyphens-auto ${feature ? "" : "flex-1"}`}>
           {tr(update.summary, lang)}
         </p>
         <Link href={href} className="link-arrow mt-6 self-start">
@@ -217,7 +217,7 @@ export function UpdateRow({
             {tr(update.title, lang)}
           </Link>
         </h2>
-        <p className="mt-3 leading-relaxed text-ink-2">{tr(update.summary, lang)}</p>
+        <p className="mt-3 leading-relaxed text-ink-2 text-justify hyphens-auto">{tr(update.summary, lang)}</p>
         <Link href={href} className="link-arrow mt-5 self-start">
           {readMore}
           <ArrowRight aria-hidden="true" className="h-4 w-4" />

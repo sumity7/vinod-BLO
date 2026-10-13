@@ -43,7 +43,7 @@ export function Milestones({ lang }: { lang: Lang }) {
                       </span>
                     )}
                   </h3>
-                  <p className="mt-2 max-w-2xl text-ink-2">{tr(s.body, lang)}</p>
+                  <p className="mt-2 max-w-2xl text-ink-2 text-justify hyphens-auto">{tr(s.body, lang)}</p>
                   {s.items && (
                     <ul className="mt-4 flex flex-wrap gap-2">
                       {s.items.map((it) => (

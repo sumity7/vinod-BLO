@@ -266,6 +266,13 @@ label {
   color: var(--saffron);
 }
 
+/* Long reading text is justified so both edges line up. Hyphenation evens out the word gaps on a
+   phone (English only: browsers do not hyphenate Hindi). */
+.prose-ed p,
+.article p {
+  text-align: justify;
+  hyphens: auto;
+}
 .prose-ed p {
   margin-block: 0 1.1em;
   max-width: 62ch;
