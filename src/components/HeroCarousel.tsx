@@ -201,11 +201,11 @@ export function HeroCarousel({
                             onClick={() => setIndex(j)}
                             aria-label={`${labels.goTo} ${j + 1}`}
                             aria-current={j === index}
-                            className="grid h-11 w-8 place-items-center"
+                            className="group grid h-11 w-8 place-items-center"
                           >
                             <span
                               className={`block h-2 rounded-full bg-white transition-all duration-300 ${
-                                j === index ? "w-5" : "w-2 opacity-50"
+                                j === index ? "w-5" : "w-2 opacity-50 group-hover:scale-125 group-hover:opacity-100"
                               }`}
                             />
                           </button>

@@ -290,6 +290,8 @@ label {
 }
 
 /* ---------- Buttons & links ----------
+   Hover rules sit inside @media (hover: hover), like Tailwind's hover: utilities, so a tap on a phone
+   never leaves a button stuck in its hover look; :active gives touch its own press feedback.
    Three kinds only: primary (solid deep saffron), secondary (quiet outline) and the text link.
    One height, soft corners, and the same hover everywhere: a 1px lift. Solid buttons use the deep
    saffron so white text stays readable. */
@@ -320,12 +322,16 @@ label {
 }
 /* Hover: a 1px lift and a soft shadow. Press: a small dip, then it eases back. Only transform and
    shadow change, so no neighbour ever moves. */
-.btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px -8px rgba(60, 30, 10, 0.45);
+@media (hover: hover) {
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px -8px rgba(60, 30, 10, 0.45);
+  }
 }
-.btn:hover svg {
-  transform: translateX(2px);
+@media (hover: hover) {
+  .btn:hover svg {
+    transform: translateX(2px);
+  }
 }
 .btn:active {
   transform: scale(0.97);
@@ -344,20 +350,24 @@ label {
   color: #fff;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 6px 16px -8px rgba(158, 60, 3, 0.55);
 }
-.btn-primary:hover,
-.btn-solid:hover {
-  background: var(--burnt);
-  border-color: var(--burnt);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 12px 24px -12px rgba(158, 60, 3, 0.75);
+@media (hover: hover) {
+  .btn-primary:hover,
+  .btn-solid:hover {
+    background: var(--burnt);
+    border-color: var(--burnt);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 12px 24px -12px rgba(158, 60, 3, 0.75);
+  }
 }
 .btn-ghost {
   background: var(--paper);
   border-color: color-mix(in srgb, var(--ink) 18%, transparent);
   color: var(--ink);
 }
-.btn-ghost:hover {
-  border-color: var(--ink);
-  background: var(--sand);
+@media (hover: hover) {
+  .btn-ghost:hover {
+    border-color: var(--ink);
+    background: var(--sand);
+  }
 }
 /* On saffron, burnt or photo backgrounds. */
 .btn-light {
@@ -365,20 +375,24 @@ label {
   color: #fff;
   background: rgba(255, 255, 255, 0.06);
 }
-.btn-light:hover {
-  background: #fff;
-  border-color: #fff;
-  color: var(--ink);
+@media (hover: hover) {
+  .btn-light:hover {
+    background: #fff;
+    border-color: #fff;
+    color: var(--ink);
+  }
 }
 .btn-white {
   background: #fff;
   border-color: #fff;
   color: var(--saffron-deep);
 }
-.btn-white:hover {
-  background: var(--peach);
-  border-color: var(--peach);
-  color: var(--burnt);
+@media (hover: hover) {
+  .btn-white:hover {
+    background: var(--peach);
+    border-color: var(--peach);
+    color: var(--burnt);
+  }
 }
 
 .link-arrow {
@@ -396,17 +410,23 @@ label {
 .link-arrow svg {
   transition: transform 0.25s var(--ease-out);
 }
-.link-arrow:hover {
-  color: var(--burnt);
+@media (hover: hover) {
+  .link-arrow:hover {
+    color: var(--burnt);
+  }
 }
-.link-arrow:hover svg {
-  transform: translateX(3px);
+@media (hover: hover) {
+  .link-arrow:hover svg {
+    transform: translateX(3px);
+  }
 }
 .on-dark .link-arrow {
   color: var(--saffron);
 }
-.on-dark .link-arrow:hover {
-  color: #fff;
+@media (hover: hover) {
+  .on-dark .link-arrow:hover {
+    color: #fff;
+  }
 }
 
 /* Card surface: white, soft corners, a low warm shadow that lifts on hover when interactive. */
@@ -423,9 +443,11 @@ label {
     transform 0.3s var(--ease-out),
     border-color 0.3s var(--ease-out);
 }
-.card-hover:hover {
-  box-shadow: var(--shadow-lift);
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .card-hover:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+  }
 }
 
 /* ---------- Motion (CSS only, so the hero never waits for JS) ---------- */
@@ -507,8 +529,10 @@ label {
   transform: scaleX(1);
   opacity: 1;
 }
-.group\/link:hover .nav-underline {
-  transform: scaleX(1);
+@media (hover: hover) {
+  .group\/link:hover .nav-underline {
+    transform: scaleX(1);
+  }
 }
 
 /* Political journey: the markers pop in and the connecting lines draw downward, one item after the
@@ -857,8 +881,12 @@ textarea.field {
   cursor: pointer;
   transition: border-color 0.2s var(--ease-out), background-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
 }
-.chip:hover {
-  border-color: var(--saffron);
+@media (hover: hover) {
+  .chip:hover {
+    border-color: var(--saffron);
+    background: var(--saffron-tint);
+    color: var(--ink);
+  }
 }
 .chip[aria-pressed="true"],
 .chip:has(input:checked) {

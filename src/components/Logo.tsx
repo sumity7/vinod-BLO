@@ -10,7 +10,7 @@ export function Logo({ lang }: { lang: Lang }) {
     <Link
       href={localePath(lang)}
       aria-label={`${name} – ${lang === "hi" ? "मुख्य पृष्ठ" : "home"}`}
-      className="flex min-h-11 min-w-0 shrink items-center"
+      className="flex min-h-11 min-w-0 shrink items-center transition-opacity duration-200 hover:opacity-80"
     >
       <Image
         src="/images/brand-logo-h.webp"
