@@ -233,6 +233,7 @@ const portal = {
     placePlaceholder: { en: "e.g. Booth President, Harhua", hi: "जैसे: बूथ अध्यक्ष, हरहुआ" },
     photo: { en: "Your photo (optional)", hi: "आपकी फ़ोटो (वैकल्पिक)" },
     photoHint: { en: "Stays on your phone; it is not uploaded.", hi: "फ़ोटो आपके फ़ोन में ही रहती है, कहीं अपलोड नहीं होती।" },
+    choosePhoto: { en: "Choose photo", hi: "फ़ोटो चुनें" },
     removePhoto: { en: "Remove photo", hi: "फ़ोटो हटाएँ" },
     download: { en: "Download card", hi: "कार्ड डाउनलोड करें" },
     share: { en: "Share on WhatsApp", hi: "व्हाट्सऐप पर भेजें" },

@@ -37,6 +37,7 @@ type Labels = {
   placePlaceholder: string;
   photo: string;
   photoHint: string;
+  choosePhoto: string;
   removePhoto: string;
   download: string;
   share: string;
@@ -305,7 +306,7 @@ export function ECardMaker({
           <div className="flex flex-wrap items-center gap-3">
             <label className="btn btn-ghost cursor-pointer">
               <ImagePlus aria-hidden="true" className="h-4 w-4" />
-              {labels.photo}
+              {labels.choosePhoto}
               <input
                 type="file"
                 accept="image/*"
