@@ -8,7 +8,7 @@ import type { L } from "@/lib/i18n";
  * Portraits live at /public/images/ideals/<slug>.webp, cropped to 4:5 from freely licensed images on
  * Wikimedia Commons. `credit` records each one's author, licence and source page; by the owner's
  * choice it is not shown on the site, although CC BY and CC BY-SA ask for it. Ashok Singhal has no
- * free portrait there, so his is still the one from that page.
+ * free portrait there, so his is the full-size (239x300) portrait from that page, enlarged to 480x600.
  * `born`/`died` are Gregorian dates, given only where they are well recorded; they drive the
  * jayanti and punyatithi e-cards.
  */
@@ -89,7 +89,8 @@ export const ideals: Ideal[] = [
       en: "The Shrimad Bhagavad Gita is the greatest source of dharmic awakening and devotion to duty. I regard it as the inspiration for every good deed of my life.",
       hi: "धर्म जागरण एवं कर्मनिष्ठा का सबसे बड़ा स्रोत श्रीमद्भगवद्गीता ग्रन्थ है। मैं अपने जीवनकाल के सत्कर्मों का प्रेरणा स्रोत इसे ही मानता हूँ।",
     },
-    image: img("ashok-singhal"),
+    // Its own file name: the earlier thumbnail was a tight, tiny crop, and cached copies of it must not linger.
+    image: img("ashok-singhal-portrait"),
     born: "1926-09-27",
     died: "2015-11-17",
   },
