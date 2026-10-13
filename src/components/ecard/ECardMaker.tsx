@@ -10,6 +10,8 @@ export type CardOption = {
   id: string;
   label: string;
   greeting: string;
+  title?: string;
+  kicker?: string;
   line: string;
   motif: ECardTemplate["motif"];
   palette: ECardTemplate["palette"];
@@ -154,6 +156,8 @@ export function ECardMaker({
       palette: option.palette,
       motif: option.motif,
       greeting: option.greeting,
+      title: option.title,
+      kicker: option.kicker,
       line: option.line,
       medallion: option.medallion,
       medallionImage,

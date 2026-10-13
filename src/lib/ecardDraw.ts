@@ -15,6 +15,10 @@ export type CardInput = {
   palette: [string, string, string, string];
   motif: Motif;
   greeting: string;
+  /** The big headline (the occasion or the person); falls back to the greeting. */
+  title?: string;
+  /** The small tag above the headline. */
+  kicker?: string;
   line: string;
   /** Shown in a medallion instead of the motif's centrepiece (tribute cards): initials, used when there is no portrait. */
   medallion?: string;
@@ -559,54 +563,166 @@ export function drawCard(canvas: HTMLCanvasElement, input: CardInput) {
   ctx.fillStyle = lightHeader ? "rgba(10,40,50,0.75)" : "rgba(255,255,255,0.82)";
   ctx.fillText(input.leader.role, hx, 98);
 
-  // Text block: greeting, rule, main line and an optional detail, centred in the space between the
-  // picture and the people.
+  // Poster text: a tag pill, a big title, an ornamental divider and a message panel, centred in the
+  // space between the picture and the people.
   ctx.textAlign = "center";
   ctx.textBaseline = "alphabetic";
   const tribute = hasMedallion;
-  const top0 = tribute ? (input.caption ? 540 : 500) : 500;
-  const bottom0 = 890;
+  const lightBg = isLight(top);
+  const top0 = tribute ? (input.caption ? 535 : 500) : 482;
+  const bottom0 = 905;
   const avail = bottom0 - top0;
-  // Shrink the three pieces together until the block fits the space.
-  let g!: ReturnType<typeof fit>;
+  const titleText = input.title ?? input.greeting;
+  const kickerText = input.kicker ?? "";
+  const hasDevanagari = (s: string) => /[ऀ-ॿ]/.test(s);
+  const rawLine = input.line.trim();
+  const quoted = tribute && /^[“"][\s\S]*[”"]$/.test(rawLine);
+  const message = quoted ? rawLine.slice(1, -1).trim() : rawLine;
+  const PAD = 30;
+  const KICK_H = kickerText ? 66 : 0;
+  const DIV_H = 44;
+  let t!: ReturnType<typeof fit>;
   let l!: ReturnType<typeof fit>;
   let d: ReturnType<typeof fit> | null = null;
+  let panelH = 0;
   let total = 0;
-  for (let k = 1; k >= 0.6; k -= 0.05) {
-    g = fit(ctx, input.greeting, display, Math.round((tribute ? 62 : 92) * k), 30, 940, tribute ? 2 : 3);
-    l = fit(ctx, input.line, sans, Math.round((tribute ? 34 : 38) * k), 20, 900, tribute ? 5 : 2);
-    d = input.detail ? fit(ctx, input.detail, sans, Math.round(28 * k), 18, 880, 2) : null;
-    total = g.lines.length * g.size * 1.22 + 46 + l.lines.length * l.size * 1.4 + (d ? 14 + d.lines.length * d.size * 1.4 : 0);
+  for (let k = 1; k >= 0.55; k -= 0.05) {
+    t = fit(ctx, titleText, display, Math.round((tribute ? 74 : 108) * k), 30, 900, 2);
+    l = fit(ctx, message, sans, Math.round((tribute ? 34 : 40) * k), 18, tribute ? 760 : 800, tribute ? 5 : 3);
+    d = input.detail ? fit(ctx, input.detail, sans, Math.round(26 * k), 16, 780, 2) : null;
+    panelH = PAD * 2 + l.lines.length * l.size * 1.38 + (d ? 14 + d.lines.length * d.size * 1.36 : 0);
+    total = KICK_H + t.lines.length * t.size * 1.18 + DIV_H + panelH;
     if (total <= avail) break;
   }
-  let y = top0 + Math.max(0, (avail - total) / 2) + g.size * 0.95;
+  let y = top0 + Math.max(0, (avail - total) / 2);
 
-  ctx.fillStyle = ink;
-  ctx.font = `${g.size}px ${display}`;
-  for (const line of g.lines) {
-    ctx.fillText(line, CARD_W / 2, y);
-    y += g.size * 1.22;
-  }
-  // Accent rule.
-  y -= g.size * 0.22;
-  ctx.fillStyle = accent;
-  ctx.fillRect(CARD_W / 2 - 60, y - g.size * 0.5, 120, 6);
-  y += 34;
-  ctx.fillStyle = rgba(ink, 0.92);
-  ctx.font = `400 ${l.size}px ${sans}`;
-  for (const line of l.lines) {
-    ctx.fillText(line, CARD_W / 2, y);
-    y += l.size * 1.4;
-  }
-  if (d) {
-    y += 6;
-    ctx.fillStyle = rgba(ink, 0.72);
-    ctx.font = `400 ${d.size}px ${sans}`;
-    for (const line of d.lines) {
-      ctx.fillText(line, CARD_W / 2, y);
-      y += d.size * 1.4;
+  // Soft dot texture and a vignette, so the background is not a flat gradient.
+  ctx.save();
+  ctx.fillStyle = lightBg ? "rgba(0,0,0,0.045)" : "rgba(255,255,255,0.05)";
+  for (let gy = 470; gy < CARD_H; gy += 34) {
+    for (let gx = (gy / 34) % 2 ? 17 : 0; gx < CARD_W; gx += 34) {
+      ctx.beginPath();
+      ctx.arc(gx, gy, 2.2, 0, TAU);
+      ctx.fill();
     }
   }
+  const vg = ctx.createRadialGradient(CARD_W / 2, CARD_H * 0.45, CARD_W * 0.45, CARD_W / 2, CARD_H * 0.45, CARD_H * 0.8);
+  vg.addColorStop(0, "rgba(0,0,0,0)");
+  vg.addColorStop(1, lightBg ? "rgba(0,0,0,0.12)" : "rgba(0,0,0,0.3)");
+  ctx.fillStyle = vg;
+  ctx.fillRect(0, 0, CARD_W, CARD_H);
+  ctx.restore();
+
+  // Tag pill.
+  if (kickerText) {
+    ctx.save();
+    ctx.font = `600 26px ${sans}`;
+    const spaced = !hasDevanagari(kickerText);
+    if (spaced && "letterSpacing" in ctx) (ctx as unknown as { letterSpacing: string }).letterSpacing = "3px";
+    const kw = Math.min(900, ctx.measureText(kickerText).width + 64);
+    ctx.fillStyle = accent;
+    ctx.beginPath();
+    ctx.roundRect(CARD_W / 2 - kw / 2, y, kw, 46, 23);
+    ctx.fill();
+    ctx.fillStyle = isLight(accent) ? "#24160c" : "#ffffff";
+    ctx.fillText(kickerText, CARD_W / 2 + (spaced ? 1.5 : 0), y + 32);
+    ctx.restore();
+    y += KICK_H;
+  }
+
+  // Title.
+  y += t.size * 0.9;
+  ctx.save();
+  ctx.font = `${t.size}px ${display}`;
+  if (lightBg) {
+    ctx.fillStyle = ink;
+  } else {
+    ctx.shadowColor = "rgba(0,0,0,0.45)";
+    ctx.shadowBlur = 14;
+    ctx.shadowOffsetY = 5;
+    const tg = ctx.createLinearGradient(0, y - t.size, 0, y + t.size * 0.3);
+    tg.addColorStop(0, "#ffffff");
+    tg.addColorStop(1, ink === "#ffffff" ? accent : rgba(accent, 0.95));
+    ctx.fillStyle = tg;
+  }
+  for (const line of t.lines) {
+    ctx.fillText(line, CARD_W / 2, y);
+    y += t.size * 1.18;
+  }
+  ctx.restore();
+  y -= t.size * 0.9 - 8;
+
+  // Divider: line, diamond, line.
+  const dy = y + 12;
+  ctx.fillStyle = accent;
+  ctx.fillRect(CARD_W / 2 - 190, dy - 1.5, 150, 3);
+  ctx.fillRect(CARD_W / 2 + 40, dy - 1.5, 150, 3);
+  ctx.beginPath();
+  ctx.moveTo(CARD_W / 2, dy - 11);
+  ctx.lineTo(CARD_W / 2 + 11, dy);
+  ctx.lineTo(CARD_W / 2, dy + 11);
+  ctx.lineTo(CARD_W / 2 - 11, dy);
+  ctx.closePath();
+  ctx.fill();
+  y += DIV_H - 8;
+
+  // Message panel.
+  const px = 90;
+  const pw = CARD_W - px * 2;
+  ctx.fillStyle = lightBg ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.26)";
+  ctx.beginPath();
+  ctx.roundRect(px, y, pw, panelH, 28);
+  ctx.fill();
+  ctx.lineWidth = 2.5;
+  ctx.strokeStyle = rgba(accent, 0.75);
+  ctx.stroke();
+  if (quoted) {
+    ctx.save();
+    ctx.fillStyle = accent;
+    ctx.font = `110px ${display}`;
+    ctx.textAlign = "left";
+    ctx.fillText("“", px + 16, y + 78);
+    ctx.textAlign = "right";
+    ctx.fillText("”", px + pw - 16, y + panelH - 4);
+    ctx.restore();
+  }
+  let my2 = y + PAD + l.size * 1.0;
+  ctx.fillStyle = ink;
+  ctx.font = `${tribute ? "italic " : ""}400 ${l.size}px ${sans}`;
+  for (const line of l.lines) {
+    ctx.fillText(line, CARD_W / 2, my2);
+    my2 += l.size * 1.38;
+  }
+  if (d) {
+    my2 += 4;
+    ctx.fillStyle = rgba(accent, 1);
+    ctx.font = `500 ${d.size}px ${sans}`;
+    for (const line of d.lines) {
+      ctx.fillText(line, CARD_W / 2, my2);
+      my2 += d.size * 1.36;
+    }
+  }
+  y = y + panelH + l.size * 0.9;
+
+  // Frame with corner diamonds, drawn before the people so the leader stands over it.
+  ctx.save();
+  ctx.strokeStyle = rgba(accent, 0.85);
+  ctx.lineWidth = 3;
+  ctx.strokeRect(20, 20, CARD_W - 40, CARD_H - 38);
+  ctx.strokeStyle = rgba(accent, 0.35);
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(30, 30, CARD_W - 60, CARD_H - 58);
+  ctx.fillStyle = accent;
+  for (const [cx2, cy2] of [[20, 20], [CARD_W - 20, 20], [20, CARD_H - 18], [CARD_W - 20, CARD_H - 18]]) {
+    ctx.beginPath();
+    ctx.moveTo(cx2, cy2 - 12);
+    ctx.lineTo(cx2 + 12, cy2);
+    ctx.lineTo(cx2, cy2 + 12);
+    ctx.lineTo(cx2 - 12, cy2);
+    ctx.closePath();
+    ctx.fill();
+  }
+  ctx.restore();
 
   // People: the leader on the left, the sender on the right (or the leader alone, centred).
   const hasSender = input.sender.name.trim().length > 0;

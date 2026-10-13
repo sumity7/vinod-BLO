@@ -2,7 +2,7 @@ import type { L } from "./i18n";
 
 // Set NEXT_PUBLIC_SITE_URL to the live domain. Until a custom domain is chosen, the live
 // Vercel address is used, so link previews (WhatsApp, Facebook) and search engines get a real URL.
-const PRODUCTION_URL = "https://vinod-blo.vercel.app";
+const PRODUCTION_URL = "https://vinod-upadhyay.vercel.app";
 
 /**
  * Canonical origin for every absolute URL (canonical links, hreflang, Open Graph, sitemap, robots,
