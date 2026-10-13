@@ -237,7 +237,7 @@ export const media: MediaItem[] = [
       en: "Portrait of Vinod Kumar Upadhyay in glasses and a checked shirt",
       hi: "चश्मा और चारखाने की कमीज़ में विनोद कुमार उपाध्याय का चित्र",
     },
-    caption: { en: "Portrait", hi: "चित्र" },
+    caption: { en: "Vinod Kumar Upadhyay", hi: "विनोद कुमार उपाध्याय" },
     tone: "sand",
   },
 ];

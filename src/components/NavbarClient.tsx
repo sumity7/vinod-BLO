@@ -131,14 +131,15 @@ export function NavbarClient({ lang, items, labels, logo, switcher }: Props) {
   // Current page: deep saffron text with a bar drawn under it (scaleX, so nothing changes size). Others:
   // ink, with a soft fill and a lighter bar on hover.
   const itemClass = (active: boolean, open = false) =>
-    `group/link relative flex min-h-11 items-center gap-1 rounded-soft px-3.5 py-2 text-[1rem] font-medium transition-colors duration-200 xl:px-4 ${
+    // Tighter from 1280 to 1440px, where the full row only just fits beside the logo; never wrapped.
+    `group/link relative flex min-h-11 items-center gap-1 whitespace-nowrap rounded-soft px-2.5 py-2 text-[0.95rem] font-medium transition-colors duration-200 min-[90rem]:px-4 min-[90rem]:text-[1rem] ${
       active ? "text-saffron-deep" : open ? "bg-sand text-ink" : "text-ink-2 hover:bg-sand hover:text-ink"
     }`;
   const underline = (active: boolean) => (
     <span
       aria-hidden="true"
       data-active={active}
-      className="nav-underline absolute inset-x-3.5 bottom-1 h-[2px] rounded-full bg-saffron xl:inset-x-4"
+      className="nav-underline absolute inset-x-2.5 bottom-1 h-[2px] rounded-full bg-saffron min-[90rem]:inset-x-4"
     />
   );
 
@@ -168,7 +169,7 @@ export function NavbarClient({ lang, items, labels, logo, switcher }: Props) {
                         href={localePath(lang, item.href)}
                         onClick={closeAll}
                         aria-current={active ? "page" : undefined}
-                        className={item.id === "contact" ? "btn btn-primary btn-sm ml-3" : itemClass(active)}
+                        className={item.id === "contact" ? "btn btn-primary btn-sm ml-2 whitespace-nowrap min-[90rem]:ml-3" : itemClass(active)}
                       >
                         {item.label}
                         {item.id === "contact" ? null : underline(active)}

@@ -63,7 +63,7 @@ export async function StayConnected({ lang }: { lang: Lang }) {
               <div className={`${PANEL} h-[500px]`}>
                 {/* Shown behind the plugin: it stays visible if Facebook does not load the timeline. */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-8 text-center">
-                  <span className="grid h-14 w-14 place-items-center rounded-full bg-saffron-deep text-white">
+                  <span className="shrink-0 grid h-14 w-14 place-items-center rounded-full bg-saffron-deep text-white">
                     <FacebookIcon className="h-7 w-7" />
                   </span>
                   <p className="font-display text-xl font-semibold text-ink">{site.name[lang]}</p>

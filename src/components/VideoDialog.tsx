@@ -70,7 +70,7 @@ export function VideoDialog({
                   type="button"
                   onClick={onClose}
                   aria-label={closeLabel}
-                  className="flex h-11 w-11 items-center justify-center border border-white/30 text-white hover:bg-white hover:text-ink"
+                  className="shrink-0 flex h-11 w-11 items-center justify-center border border-white/30 text-white hover:bg-white hover:text-ink"
                 >
                   <X aria-hidden="true" className="h-5 w-5" />
                 </button>

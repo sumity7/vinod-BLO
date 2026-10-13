@@ -53,7 +53,7 @@ export function PortalCtas({ lang }: { lang: Lang }) {
               <div aria-hidden="true" className="absolute inset-x-0 -bottom-px top-0 bg-gradient-to-t from-burnt from-[6%] via-burnt/40 to-burnt/0" />
             </div>
             <div className="relative flex flex-1 flex-col px-7 pb-8 sm:px-9">
-              <span className="relative -mt-8 grid h-16 w-16 place-items-center rounded-2xl bg-white text-saffron-deep shadow-raised transition-transform duration-500 motion-safe:group-hover:-rotate-6 motion-safe:group-hover:scale-105">
+              <span className="shrink-0 relative -mt-8 grid h-16 w-16 place-items-center rounded-2xl bg-white text-saffron-deep shadow-raised transition-transform duration-500 motion-safe:group-hover:-rotate-6 motion-safe:group-hover:scale-105">
                 <span aria-hidden="true" className="absolute inset-0 rounded-2xl bg-white/25 motion-safe:animate-ping [animation-duration:2.8s]" />
                 <FileText aria-hidden="true" className="relative h-7 w-7" />
               </span>
@@ -123,7 +123,7 @@ export function PortalCtas({ lang }: { lang: Lang }) {
               </div>
             </div>
             <div className="relative flex flex-1 flex-col px-7 pb-8 sm:px-9">
-              <span className="relative -mt-8 grid h-16 w-16 place-items-center rounded-2xl bg-saffron-deep text-white shadow-raised transition-transform duration-500 motion-safe:group-hover:rotate-6 motion-safe:group-hover:scale-105">
+              <span className="shrink-0 relative -mt-8 grid h-16 w-16 place-items-center rounded-2xl bg-saffron-deep text-white shadow-raised transition-transform duration-500 motion-safe:group-hover:rotate-6 motion-safe:group-hover:scale-105">
                 <IdCard aria-hidden="true" className="h-7 w-7" />
               </span>
               <h2 className="font-display mt-5 text-[1.7rem] leading-snug">{h.ecardTitle}</h2>

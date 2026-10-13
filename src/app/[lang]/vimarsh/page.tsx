@@ -35,7 +35,7 @@ export default async function VimarshPage({ params }: LangParams) {
         <div className="shell">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="flex items-center gap-3">
-              <span className="grid h-12 w-12 place-items-center rounded-full bg-ganga text-marigold">
+              <span className="shrink-0 grid h-12 w-12 place-items-center rounded-full bg-ganga text-marigold">
                 <BookOpenText aria-hidden="true" className="h-6 w-6" />
               </span>
               <div>
@@ -60,7 +60,7 @@ export default async function VimarshPage({ params }: LangParams) {
         <div className="shell">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="flex items-center gap-3">
-              <span className="grid h-12 w-12 place-items-center rounded-full bg-white/10 text-marigold">
+              <span className="shrink-0 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-marigold">
                 <TrendingUp aria-hidden="true" className="h-6 w-6" />
               </span>
               <div>

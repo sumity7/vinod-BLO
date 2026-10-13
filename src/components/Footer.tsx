@@ -66,7 +66,7 @@ export function Footer({ lang }: { lang: Lang }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${s.label} (opens in a new tab)`}
-                      className="grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white ring-1 ring-white/25 transition-colors hover:bg-white hover:text-saffron-deep"
+                      className="shrink-0 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white ring-1 ring-white/25 transition-colors hover:bg-white hover:text-saffron-deep"
                     >
                       <Icon className="h-5 w-5" />
                     </a>

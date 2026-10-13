@@ -100,7 +100,7 @@ export function QuickDockClient({ label, close, items }: { label: string; close:
         >
           <div className="flex items-center justify-between bg-ganga px-4 py-2.5 text-white">
             <p className="text-sm font-semibold">{label}</p>
-            <button type="button" onClick={() => setOpen(false)} className="-mr-1 grid h-8 w-8 place-items-center rounded-full hover:bg-white/10">
+            <button type="button" onClick={() => setOpen(false)} className="shrink-0 -mr-1 grid h-8 w-8 place-items-center rounded-full hover:bg-white/10">
               <X aria-hidden="true" className="h-4 w-4" />
               <span className="sr-only">{close}</span>
             </button>
