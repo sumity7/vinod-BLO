@@ -23,7 +23,7 @@ export function SiteCredit({ lang }: { lang: Lang }) {
     >
       <span className="block">
         <span
-          className={`block whitespace-nowrap text-xs font-medium leading-snug text-peach ${lang === "en" ? "uppercase tracking-[0.14em]" : ""}`}
+          className={`block text-xs font-medium sm:whitespace-nowrap leading-snug text-peach ${lang === "en" ? "uppercase tracking-[0.14em]" : ""}`}
         >
           {t.label}
         </span>

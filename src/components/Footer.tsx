@@ -81,8 +81,10 @@ export function Footer({ lang }: { lang: Lang }) {
 
       <div className="border-t border-white/20">
         {/* One row: copyright on the left, the website credit on the right with room beside it for the
-            assistant button, which is fixed to the bottom-right corner on the same line. */}
-        <div className="shell flex flex-col gap-4 pb-24 pt-5 text-sm text-white/90 sm:flex-row sm:items-center sm:justify-between sm:py-5 lg:pb-5">
+            assistant button, which is fixed to the bottom-right corner on the same line. On phones the
+            floating buttons take a narrow strip at the right edge, so that strip is kept clear (right
+            padding) instead of adding empty space below. */}
+        <div className="shell flex flex-col gap-4 pb-6 pt-5 text-sm text-white/90 max-sm:pr-[5.25rem]! sm:flex-row sm:items-center sm:justify-between sm:py-5">
           <p>
             © {year} {site.name[lang]}. {d.footer.rights}
           </p>
