@@ -224,7 +224,7 @@ export const media: MediaItem[] = [
       en: "Portrait of Vinod Kumar Upadhyay, seated, in a white shirt, against a saffron backdrop",
       hi: "केसरिया पृष्ठभूमि के सामने सफ़ेद कमीज़ में बैठे विनोद कुमार उपाध्याय का चित्र",
     },
-    caption: { en: "Official portrait", hi: "आधिकारिक चित्र" },
+    caption: { en: "Vinod Kumar Upadhyay", hi: "विनोद कुमार उपाध्याय" },
     tone: "saffron",
   },
   {
